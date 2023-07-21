@@ -1,0 +1,7 @@
+0.35s    62698  https://cs.opensource.google/go/go/+/refs/tags/go1.20.6:src/os/file.go;l=245
+0.42s    62698  https://cs.opensource.google/go/go/+/refs/tags/go1.20.6:src/os/file.go;l=245
+0.55s     6870  https://alexa.com
+0.60s    62698  https://cs.opensource.google/go/go/+/refs/tags/go1.20.6:src/os/file.go;l=245
+0.90s   948543  https://www.espn.com/
+Get "https://linkedin.com": net/http: TLS handshake timeout
+10.15s elapsed
