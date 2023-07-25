@@ -24,10 +24,7 @@ import (
 // !+main
 
 var (
-	palette = color.Palette{
-		color.RGBA{A: 255},
-		color.RGBA{G: 255, A: 255},
-	}
+	palette = []color.Color{color.Black, color.RGBA{G: 255, A: 255}}
 )
 
 const (
@@ -79,12 +76,8 @@ func lissajous(out io.Writer) {
 		phase += 0.1
 		anim.Delay = append(anim.Delay, delay)
 		anim.Image = append(anim.Image, img)
-
-		f, _ := os.Create("animation.gif")
-		gif.EncodeAll(f, &anim)
-		f.Close()
-
 	}
+	gif.EncodeAll(out, &anim)
 }
 
 //!-main

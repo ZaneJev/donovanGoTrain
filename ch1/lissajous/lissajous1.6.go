@@ -18,17 +18,16 @@ import (
 	"math/rand"
 	"net/http"
 	"os"
-	"strconv"
 	"time"
 )
 
 var (
-	palette1 = color.Palette{
+	palette1 = []color.Color{
 		color.RGBA{R: 255, G: 0, B: 115, A: 255},
 		color.RGBA{R: 123, G: 100, B: 31, A: 255},
 	}
 
-	palette2 = color.Palette{
+	palette2 = []color.Color{
 		color.RGBA{R: 255, A: 255},         // Красный
 		color.RGBA{G: 255, A: 255},         // Зеленый
 		color.RGBA{B: 255, A: 255},         // Синий
@@ -36,7 +35,7 @@ var (
 		color.RGBA{R: 255, B: 255, A: 255}, // Фиолетовый
 	}
 
-	palette3 = color.Palette{
+	palette3 = []color.Color{
 		color.RGBA{R: 255, A: 255},                 // Красный
 		color.RGBA{G: 255, A: 255},                 // Зеленый
 		color.RGBA{B: 255, A: 255},                 // Синий
@@ -90,18 +89,15 @@ func lissajousHard(out io.Writer) {
 			for t := 0.0; t < cycles*2*math.Pi; t += res {
 				x := math.Sin(t)
 				y := math.Sin(t*freq + phase)
-				// TODO картинки одинаковые, надо разобраться почему
 				img.SetColorIndex(size+int(x*size+0.5), size+int(y*size+0.5),
 					uint8(int(t/res)%len(palettes)))
 			}
 			phase += 0.1
 			anim.Delay = append(anim.Delay, delay)
 			anim.Image = append(anim.Image, img)
-			f, _ := os.Create("animation" + strconv.Itoa(j) + ".gif")
-			gif.EncodeAll(f, &anim)
-			f.Close()
 		}
 	}
+	gif.EncodeAll(out, &anim)
 }
 
 //!-main
